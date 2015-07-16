@@ -29,32 +29,3 @@ int HexStringToInt(char * hex)
     
     return total;
 }
-
-char IntToB64Char(int num)
-{
-    if (num >= 0 && num <= 25)
-    {
-        return 'A' + num;
-    }
-    else if (num >= 26 && num <= 51)
-    {
-        return 'a' + num - 26;
-    }
-    else if (num >= 52 && num <= 61)
-    {
-        return '0' + num - 52;
-    }
-    else if (num == 62)
-    {
-        return '+';
-    }
-    else if (num == 63)
-    {
-        return '/';
-    }
-}
-
-char * IntToB64String(int num)
-{
-    return "ba";
-}
