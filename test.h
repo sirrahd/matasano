@@ -5,6 +5,8 @@
 // hex.c
 void TestHexCharToInt(int * success, int * failure);
 void TestHexStringToInt(int * success, int * failure);
+void TestIntToHexChar(int * success, int * failure);
+void TestIntToHexString(int * success, int * failure);
 
 // base64.c
 void TestIntToB64Char(int * success, int * failure);

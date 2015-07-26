@@ -29,3 +29,31 @@ int HexStringToInt(char * hex)
     
     return total;
 }
+
+char IntToHexChar(int num)
+{
+    if (num <= 9)
+    {
+        return num;
+    }
+    else
+    {
+        return (char)(87 + num);
+    }
+}
+
+char * IntToHexString(int num);
+{
+    int length = (int)(log(num) / log(16)) + 1;
+    
+    char * retVal = malloc(sizeof(char) * (length + 1));
+    retVal[length = '\0';
+    
+    for (int i = 1; i <= length; i++)
+    {
+        retVal[length - i] = IntToHexChar(num % (int)(pow(16, i)));
+        num /= (int)pow(16, i);
+    }
+    
+    return retVal;
+}

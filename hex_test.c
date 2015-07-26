@@ -57,3 +57,50 @@ void TestHexStringToInt(int * success, int * failure)
         }
     }
 }
+
+void TestIntToHexChar(int * success, int * failure)
+{
+    int i;
+    int test[11] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                    10, 11, 12, 13, 14, 15};
+    char result[11] = { '0', '1', '2', '3', '4', '5',
+                        '6', '7', '8', '9', '10', '11',
+                        '12', 13', '14', '15'};
+    
+    for (i = 0; i < 11; i++)
+    {
+        printf("IntToHexChar(\"%i\")...", test[i]);
+        if (IntToHexChar(test[i]) == result[i])
+        {
+            printf("PASS\n");
+            (*success)++;
+        }
+        else
+        {
+            printf("FAIL (%c != %c)", IntToHexChar(test[i]), result[i]);
+            (*failure)++;
+        }
+    }
+}
+
+void TestIntToHexString(int * success, int * failure)
+{
+    int i;
+    int test[3] = { 100, 1901, 518 };
+    char result[3][3] = { "64", "dt", "IG" };
+    
+    for (i = 0; i < 3; i++)
+    {
+        printf("IntToB64String(\"%i\")...", test[i]);
+        if (strcmp(IntToB64String(test[i]), result[i]) == 0)
+        {
+            printf("PASS\n");
+            (*success)++;
+        }
+        else
+        {
+            printf("FAIL (%s)\n", test[i]);
+            (*failure)++;
+        }
+    }
+}
