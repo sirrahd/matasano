@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-int HexCharToInt(char hex)
+int HexCharToInt(const char hex)
 {
     if ('0' <= hex && '9' >= hex)
     {
@@ -20,7 +20,7 @@ int HexCharToInt(char hex)
     }
 }
 
-int HexStringToInt(char * hex)
+int HexStringToInt(const char * hex)
 {
     int i, total;
     for (i = 0, total = 0; i < strlen(hex); i++)
@@ -35,11 +35,15 @@ char IntToHexChar(int num)
 {
     if (num <= 9)
     {
-        return num;
+        return (char)(48 + num);
+    }
+    else if (num >= 10 && num <= 15)
+    {
+        return (char)(87 + num);
     }
     else
     {
-        return (char)(87 + num);
+        return '!';
     }
 }
 
@@ -47,14 +51,15 @@ char * IntToHexString(int num)
 {
     int length = (int)(log(num) / log(16)) + 1;
     
-    char * retVal = malloc(sizeof(char) * (length + 1));
-    retVal[length] = '\0';
+    char * retVal = malloc(sizeof(char) * (length));
     
     for (int i = 1; i <= length; i++)
     {
-        retVal[length - i] = IntToHexChar(num % (int)(pow(16, i)));
-        num /= (int)pow(16, i);
+        retVal[length - i] = IntToHexChar(num % 16);
+        num /= 16;
     }
     
     return retVal;
 }
+
+

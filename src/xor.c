@@ -5,7 +5,7 @@
 #include "xor.h"
 
 // Assumes equal-length numbers
-char * FixedXor(char * num1, char * num2)
+char * FixedXor(const char * num1, const char * num2)
 {
     int length = strlen(num1);
     char * result = malloc(sizeof(char) * (length + 1));

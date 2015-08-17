@@ -1,1 +1,1 @@
-char * FixedXor(char * num1, char * num2);
+char * FixedXor(const char * num1, const char * num2);

@@ -35,8 +35,7 @@ char * IntToB64String(int num)
     
     length = (int)(log(num) / log(64)) + 1;
     
-    char * retVal = malloc(sizeof(char) * (length + 1));
-    retVal[length] = '\0';
+    char * retVal = malloc(sizeof(char) * (length));
     
     for (i = 1; i <= length; i++)
     {
@@ -47,13 +46,14 @@ char * IntToB64String(int num)
     return retVal;
 }
 
-char * HexCharToB64String(char * hex)
+char * HexCharToB64String(const char * hex)
 {
     int length = strlen(hex);
     char * retVal = malloc(sizeof(char) * (length * 2 / 3) + 1); 
+    char tempString[4] = "\0";
+
     for (int i = 0; i < length; i += 3)
     {
-        char tempString[4] = "\0";
         for (int j = 0; i + j < length && j < 3; j++)
         {
             tempString[j] = hex[i + j];

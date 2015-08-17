@@ -3,63 +3,60 @@
 
 void TestIntToB64Char(int * success, int * failure)
 {
-    int i;
-    int test[11] = {0, 15, 25, 26, 47, 51, 52, 55, 61, 62, 63};
-    char result[11] = { 'A', 'P', 'Z', 'a', 'v', 'z',
-                        '0', '3', '9', '+', '/'};
-    
-    for (i = 0; i < 11; i++)
+    const char FUNCNAME[] = "IntToB64Char";
+    const char * tests[11][2] = 
     {
-        printf("IntToB64Char(\"%i\")...", test[i]);
-        if (IntToB64Char(test[i]) == result[i])
-        {
-            printf("PASS\n");
-            (*success)++;
-        }
-        else
-        {
-            printf("FAIL (%c != %c)", IntToB64Char(test[i]), result[i]);
-            (*failure)++;
-        }
+        {"0", "A"},
+        {"15", "P"},
+        {"25", "Z"},
+        {"26", "a"},
+        {"47", "v"},
+        {"51", "z"},
+        {"52", "0"},
+        {"55", "3"},
+        {"61", "9"},
+        {"62", "+"},
+        {"63", "/"},
+    };
+    
+    for (int i = 0; i < 11; i++)
+    {
+        char result[100];
+        snprintf(result, 100, "%c", IntToB64Char(atoi(tests[i][0])));
+        printResult(FUNCNAME, tests[i], result, success, failure);
     }
 }
 
 void TestIntToB64String(int * success, int * failure)
 {
-    int i;
-    int test[3] = { 1170, 1901, 518 };
-    char result[3][3] = { "SS", "dt", "IG" };
-    
-    for (i = 0; i < 3; i++)
+    const char FUNCNAME[] = "IntToB64String";
+    const char * tests[3][2] = 
     {
-        printf("IntToB64String(\"%i\")...", test[i]);
-        if (strcmp(IntToB64String(test[i]), result[i]) == 0)
-        {
-            printf("PASS\n");
-            (*success)++;
-        }
-        else
-        {
-            printf("FAIL (%s)\n", test[i]);
-            (*failure)++;
-        }
+        {"1170", "SS"},
+        {"1901", "dt"},
+        {"518", "IG"},
+    };
+    
+    for (int i = 0; i < 3; i++)
+    {
+        char result[100];
+        snprintf(result, 100, "%s", IntToB64String(atoi(tests[i][0])));
+        printResult(FUNCNAME, tests[i], result, success, failure);
     }
 }
 
 void TestHexCharToB64String(int * success, int * failure)
 {
-    printf("HexCharToB64String()...");
-    char testHex[] = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d";
-    char testResult[] = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t";
-    
-    if (strcmp(testResult, HexCharToB64String(testHex)) == 0)
+    const char FUNCNAME[] = "HexCharToB64String";
+    const char * tests[1][2] =
     {
-        printf("PASS\n");
-        (*success)++;
-    }
-    else
+        {"49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d", "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"}
+    };
+
+    for (int i = 0; i < 1; i++)
     {
-        printf("FAIL (%s != %s)\n", HexCharToB64String(testHex), "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t");
-        (*failure)++;
+        char result[100];
+        snprintf(result, 100, "%s", HexCharToB64String(tests[i][0]));
+        printResult(FUNCNAME, tests[i], result, success, failure);
     }
 }
