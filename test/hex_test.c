@@ -86,7 +86,21 @@ void TestIntToHexString(int * success, int * failure)
     for (int i = 0; i < 3; i++)
     {
         char result[100];
-        snprintf(result, 100, "%s", IntToHexString(atoi(tests[i][0])));
-        printResult(FUNCNAME, tests[i], result, success, failure);
+        printResult(FUNCNAME, tests[i], IntToHexString(result, atoi(tests[i][0])), success, failure);
+    }
+}
+
+void TestHexStringToCharString(int * success, int * failure)
+{
+    const char FUNCNAME[] = "HexStringToCharString";
+    const char * tests[1][2] = 
+    {
+        {"48656C6C6F2065766572796F6E6521", "Hello everyone!"},
+    };
+
+    for (int i = 0; i < 1; i++)
+    {
+        char result[100];
+        printResult(FUNCNAME, tests[i], HexStringToCharString(result, tests[i][0]), success, failure);
     }
 }

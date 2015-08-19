@@ -11,11 +11,12 @@ void main()
     TestHexStringToInt(&success, &failure);
     TestIntToHexChar(&success, &failure);
     TestIntToHexString(&success, &failure);
+    TestHexStringToCharString(&success, &failure);
     
     // base64_test.h
     TestIntToB64Char(&success, &failure);
     TestIntToB64String(&success, &failure);
-    TestHexCharToB64String(&success, &failure);
+    TestHexStringToB64String(&success, &failure);
 
     // xor_test.h
     TestFixedXor(&success, &failure);

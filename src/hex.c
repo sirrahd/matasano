@@ -1,6 +1,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 int HexCharToInt(const char hex)
 {
@@ -47,19 +48,31 @@ char IntToHexChar(int num)
     }
 }
 
-char * IntToHexString(int num)
+char * IntToHexString(char * dest, int num)
 {
     int length = (int)(log(num) / log(16)) + 1;
-    
-    char * retVal = malloc(sizeof(char) * (length));
+    dest[length] = '\0';
     
     for (int i = 1; i <= length; i++)
     {
-        retVal[length - i] = IntToHexChar(num % 16);
+        dest[length - i] = IntToHexChar(num % 16);
         num /= 16;
     }
     
-    return retVal;
+    return dest;
 }
 
+char * HexStringToCharString(char * dest, const char * hex)
+{
+    strncpy(dest, "\0", 1);
+    for (int i = 0; i < strlen(hex) - 1; i += 2)
+    {
+        char hexChar[3];
+        char stringChar[2];
+        snprintf(hexChar, 3, "%c%c", hex[i], hex[i+1]);
+        stringChar[0] = HexStringToInt(hexChar);
+        strncat(dest, stringChar, 1);
+    }
 
+    return dest;
+}

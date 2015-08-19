@@ -16,7 +16,6 @@ void TestFixedXor(int * success, int * failure)
     for (int i = 0; i < 1; i++)
     {
         char result[100];
-        snprintf(result, 100, "%s", FixedXor(tests[i][0], keys[i]));
-        printResult(FUNCNAME, tests[i], result, success, failure);
+        printResult(FUNCNAME, tests[i], FixedXor(result, tests[i][0], keys[i]), success, failure);
     }
 }

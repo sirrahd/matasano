@@ -29,37 +29,36 @@ char IntToB64Char(int num)
     }
 }
 
-char * IntToB64String(int num)
+char * IntToB64String(char * dest, int num)
 {
-    int length, i;
+    int length = (int)(log(num) / log(64)) + 1;
+    dest[length] = '\0';
     
-    length = (int)(log(num) / log(64)) + 1;
-    
-    char * retVal = malloc(sizeof(char) * (length));
-    
-    for (i = 1; i <= length; i++)
+    for (int i = 1; i <= length; i++)
     {
-        retVal[length - i] = IntToB64Char(num % (int)(pow(64, i)));
+        dest[length - i] = IntToB64Char(num % (int)(pow(64, i)));
         num /= (int)pow(64, i);
     }
     
-    return retVal;
+    return dest;
 }
 
-char * HexCharToB64String(const char * hex)
+char * HexStringToB64String(char * dest, const char * hex)
 {
     int length = strlen(hex);
-    char * retVal = malloc(sizeof(char) * (length * 2 / 3) + 1); 
-    char tempString[4] = "\0";
+    char hexSegment[4] = {'\0'};
+    char b64Segment[3] = {'\0'};
+    dest[0] = '\0';
 
     for (int i = 0; i < length; i += 3)
     {
+        char hexSegment[4] = {'\0'};
         for (int j = 0; i + j < length && j < 3; j++)
         {
-            tempString[j] = hex[i + j];
+            hexSegment[j] = hex[i + j];
         }
-        strcat(retVal, IntToB64String(HexStringToInt(tempString)));
+        strcat(dest, IntToB64String(b64Segment, HexStringToInt(hexSegment)));
     }
     
-    return retVal;
+    return dest;
 }

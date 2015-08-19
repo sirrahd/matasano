@@ -1,3 +1,3 @@
 char IntToB64Char(int num);
-char * IntToB64String(int num);
-char * HexCharToB64String(const char * hex);
+char * IntToB64String(char * dest, int num);
+char * HexStringToB64String(char * dest, const char * hex);
