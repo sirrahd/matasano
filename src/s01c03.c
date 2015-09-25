@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
-#include <ctype.h>
+
+#include "common.h"
 #include "hex.h"
 #include "xor.h"
-
-char CHARFREQ[] = "eEtTaAoOnNiIsShHrRlLdDuUcCmMwWyYfFgGpPbBvVkKjJxXqQzZ";
-int * findKeys(int dest[], int tries, const char * hexString);
-int isPrintable(const char * string);
 
 void main(int argc, char * argv[])
 {
@@ -31,56 +28,16 @@ void main(int argc, char * argv[])
 
     for (int i = 0; i < 100; i++)
     {
-        char result[100] = {'\0'};
-        SingleXor(result, string, keys[i]);
-        if (isPrintable(result) && keys[i] != 0)
+        if (keys[i] != 0)
         {
+            char result[100] = {'\0'};
+            SingleXor(result, string, keys[i]);
             printf("%i: %s\n", keys[i], result);
         }
-    }
-
-    return;
-}
-
-int isPrintable(const char * string)
-{
-    for (int i = 0; i < strlen(string); i++)
-    {
-        if (!isprint(string[i]))
+        else
         {
-            return 0;
+            break;
         }
     }
-
-    return 1;
 }
 
-int * findKeys(int dest[], int tries, const char * string)
-{
-    int count[255] = {0};
-    
-    for (int i = 0; i < strlen(string); i++)
-    {
-        count[string[i]] += 1;
-    }   
-
-    for (int i = 0; i < tries / 10; i++)
-    {
-        dest[i] = 0;
-        for (int j = 0; j < 255; j++)
-        {
-            if (count[dest[i]] < count[j])
-            {
-                dest[i] = j;
-            }
-        }
-        count[dest[i]] = 0;
-        
-        for (int k = 0; k < 10; k++)
-        {
-            dest[i] = CHARFREQ[k] ^ dest[i];
-        }
-    }
-
-    return dest;
-}
