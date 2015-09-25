@@ -6,7 +6,7 @@
 #include "hex.h"
 #include "xor.h"
 
-char CHARFREQ[] = "eEtTaAoOnNiIsShHrRlLdDuUcCmMwWyYfFgGpPbBvVkKjJxXqQzZ";
+char CHARFREQ[] = " eEtTaAoOnNiIsShHrRlLdDuUcCmMwWyYfFgGpPbBvVkKjJxXqQzZ";
 
 // Assumes equal-length numbers
 char * FixedXor(char * dest, const char * num1, const char * num2)

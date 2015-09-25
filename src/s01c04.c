@@ -1,16 +1,36 @@
+#include <stdio.h>
 
+#include "hex.h"
+#include "xor.h"
 
 void main(int argc, char * argv[])
 {
-    const char * filename;
-
     if (argc <= 1)
     {
-        const char defaultFile[] = "/share/s01c04.txt";
-        filename = defaultFile;
+        printf("Provide string(s) to process\n");
+        return;
     }
-    else
+
+    for (int i = 1; i < argc; i++)
     {
-        filename = argv[1];
+        int keys[100] = {0};
+        char string[100] = {'\0'};
+
+        HexStringToCharString(string, argv[i]);
+        findKeys(keys, 100, string);
+
+        for (int keyIter = 0; keyIter < 100; keyIter++)
+        {
+            if (keys[keyIter] != 0)
+            {
+                char result[100] = {'\0'};
+                SingleXor(result, string, keys[keyIter]);
+                printf("String found in string %i with key %i (%s):\n%s\n", i, keys[keyIter], argv[i], result);
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 }

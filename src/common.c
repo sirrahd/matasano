@@ -5,7 +5,7 @@ int isPrintable(const char * string)
 {
     for (int i = 0; i < strlen(string); i++)
     {
-        if (!isprint(string[i]))
+        if (!isprint(string[i]) && string[i] != '\n')
         {
             return 0;
         }
