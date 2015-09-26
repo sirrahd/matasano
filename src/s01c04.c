@@ -25,7 +25,7 @@ void main(int argc, char * argv[])
             {
                 char result[100] = {'\0'};
                 SingleXor(result, string, keys[keyIter]);
-                printf("String found in string %i with key %i (%s):\n%s\n", i, keys[keyIter], argv[i], result);
+                printf("String found on line %i with key %i (%s):\n%s\n", i, keys[keyIter], argv[i], result);
             }
             else
             {
