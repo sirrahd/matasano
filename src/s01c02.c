@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include "xor.h"
 
+#define MAXLENGTH 256
 void main(int argc, char * argv[])
 {
     char * string;
     char * key;
-    char result[100];
+    char result[MAXLENGTH];
 
     if (argc > 2)
     {
@@ -19,5 +20,6 @@ void main(int argc, char * argv[])
         printf("Using\nString: %s\nKey: %s\n", string, key);
     }
 
-    printf("%s\n", FixedXor(result, string, key));
+    printf("%s\n", FixedXor(result, MAXLENGTH, string, key));
 }
+#undef MAXLENGTH

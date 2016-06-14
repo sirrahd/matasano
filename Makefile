@@ -1,15 +1,14 @@
-IDIR=inc
 SDIR=src
 ODIR=obj
 TDIR=test
 
 CC=gcc
-CFLAGS=-I$(IDIR) -std=gnu99
+CFLAGS=-std=c11
 TFLAGS=-g
 LIBS=-lm
 
 _DEPS=base64.h hex.h xor.h common.h
-DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
+DEPS=$(patsubst %,$(SDIR)/%,$(_DEPS))
 
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 	@mkdir -p $(@D)

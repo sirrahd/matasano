@@ -1,11 +1,11 @@
 #include "test.h"
-#include "hex.h"
+#include "../src/hex.h"
 
-void TestHexCharToInt(int * success, int * failure)
-{
+#define TESTCOUNT 16
+#define RESULTLENGTH 8
+void TestHexCharToInt(int* success, int* failure) {
     const char FUNCNAME[] = "HexCharToInt";
-    const char * tests[16][2] = 
-    {
+    const char* tests[TESTCOUNT][2] = {
         {"a", "10"},
         {"A", "10"},
         {"b", "11"},
@@ -24,20 +24,20 @@ void TestHexCharToInt(int * success, int * failure)
         {"9", "9"},
     };
 
-    for (int i = 0; i < 16; i++)
-    {
-        char result[100];
-        snprintf(result, 100, "%i", HexCharToInt(tests[i][0][0]));
-        printResult(FUNCNAME, tests[i], result, success, failure);
+    for (int i = 0; i < TESTCOUNT; i++) {
+        char result[RESULTLENGTH];
+        snprintf(result, RESULTLENGTH, "%i", HexCharToInt(tests[i][0][0]));
+        printResult(FUNCNAME, i, result, tests[i][1], success, failure);
     }
 }
+#undef TESTCOUNT
+#undef RESULTLENGTH
 
-
-void TestHexStringToInt(int * success, int * failure)
-{    
+#define TESTCOUNT 6
+#define RESULTLENGTH 16
+void TestHexStringToInt(int* success, int* failure) {
     const char FUNCNAME[] = "HexStringToInt";
-    const char * tests[6][2] =
-    {
+    const char* tests[TESTCOUNT][2] = {
         {"492", "1170"},
         {"76d", "1901"},
         {"206b69", "2124649"},
@@ -45,62 +45,68 @@ void TestHexStringToInt(int * success, int * failure)
         {"12", "18"},
         {"1234", "4660"},
     };
-    
-    for (int i = 0; i < 6; i++)
-    {
-        char result[100];
-        snprintf(result, 100, "%i", HexStringToInt(tests[i][0]));
-        printResult(FUNCNAME, tests[i], result, success, failure);
+
+    for (int i = 0; i < TESTCOUNT; i++) {
+        char result[RESULTLENGTH];
+        snprintf(result, RESULTLENGTH, "%i", HexStringToInt(tests[i][0]));
+        printResult(FUNCNAME, i, result, tests[i][1], success, failure);
     }
 }
+#undef TESTCOUNT
+#undef RESULTLENGTH
 
-void TestIntToHexChar(int * success, int * failure)
-{
+#define TESTCOUNT 4
+#define RESULTLENGTH 4
+void TestIntToHexChar(int* success, int* failure) {
     const char FUNCNAME[] = "IntToHexChar";
-    const char * tests[4][2] = 
-    {
+    const char* tests[TESTCOUNT][2] = {
         {"0", "0"},
         {"9", "9"},
         {"10", "a"},
         {"15", "f"},
     };
 
-    for (int i = 0; i < 4; i++)
-    {
-        char result[100];
-        snprintf(result, 100, "%c", IntToHexChar(atoi(tests[i][0])));
-        printResult(FUNCNAME, tests[i], result, success, failure);
+    for (int i = 0; i < TESTCOUNT; i++) {
+        char result[RESULTLENGTH];
+        snprintf(result, RESULTLENGTH, "%c", IntToHexChar(atoi(tests[i][0])));
+        printResult(FUNCNAME, i, result, tests[i][1], success, failure);
     }
 }
+#undef TESTCOUNT
+#undef RESULTLENGTH
 
-void TestIntToHexString(int * success, int * failure)
-{
+#define TESTCOUNT 3
+#define RESULTLENGTH 8
+void TestIntToHexString(int* success, int* failure) {
     const char FUNCNAME[] = "IntToHexString";
-    const char * tests[3][2] = 
-    {
+    const char* tests[TESTCOUNT][2] = {
         {"100", "64"},
         {"1901", "76d"},
         {"518", "206"},
     };
-    
-    for (int i = 0; i < 3; i++)
-    {
-        char result[100];
-        printResult(FUNCNAME, tests[i], IntToHexString(result, atoi(tests[i][0])), success, failure);
+
+    for (int i = 0; i < TESTCOUNT; i++) {
+        char result[RESULTLENGTH];
+        IntToHexString(result, RESULTLENGTH, atoi(tests[i][0]));
+        printResult(FUNCNAME, i, result, tests[i][1], success, failure);
     }
 }
+#undef TESTCOUNT
+#undef RESULTLENGTH
 
-void TestHexStringToCharString(int * success, int * failure)
-{
+#define TESTCOUNT 1
+#define RESULTLENGTH 32
+void TestHexStringToCharString(int* success, int* failure) {
     const char FUNCNAME[] = "HexStringToCharString";
-    const char * tests[1][2] = 
-    {
+    const char* tests[TESTCOUNT][2] = {
         {"48656C6C6F2065766572796F6E6521", "Hello everyone!"},
     };
 
-    for (int i = 0; i < 1; i++)
-    {
-        char result[100];
-        printResult(FUNCNAME, tests[i], HexStringToCharString(result, tests[i][0]), success, failure);
+    for (int i = 0; i < TESTCOUNT; i++) {
+        char result[RESULTLENGTH];
+        HexStringToCharString(result, RESULTLENGTH, tests[i][0]);
+        printResult(FUNCNAME, i, result, tests[i][1], success, failure);
     }
 }
+#undef TESTCOUNT
+#undef RESULTLENGTH

@@ -4,12 +4,9 @@
 #include "hex.h"
 #include "xor.h"
 
-void main(int argc, char * argv[])
-{
-    char * hexString;
-    int keys[100] = {0};
-    char string[100] = {'\0'};
-
+#define MAXLENGTH 256
+int main(int argc, char* argv[]) {
+    char* hexString;
     if (argc <= 1)
     {
         hexString = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
@@ -20,22 +17,19 @@ void main(int argc, char * argv[])
         hexString = argv[1];
     }
 
-    HexStringToCharString(string, hexString);
+    char string[MAXLENGTH];
+    HexStringToCharString(string, MAXLENGTH, hexString);
 
-    findKeys(keys, 100, string);
+    char xorString[MAXLENGTH];
+    int xorKey = FindSingleXorKey(xorString, MAXLENGTH, string);
 
-    for (int i = 0; i < 100; i++)
-    {
-        if (keys[i] != 0)
-        {
-            char result[100] = {'\0'};
-            SingleXor(result, string, keys[i]);
-            printf("%i: %s\n", keys[i], result);
-        }
-        else
-        {
-            break;
-        }
+    if (xorKey) {
+        printf("Key: %i\nMessage: %s\n", xorKey, xorString);
     }
-}
+    else {
+        printf("Key not found.\n");
+    }
 
+    return 0;
+}
+#undef MAXLENGTH
