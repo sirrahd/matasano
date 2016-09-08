@@ -25,7 +25,7 @@ int isLikelyEnglish(const String* string) {
 }
 
 unsigned char FindSingleByteXorCypher(const String* src) {
-    for (int i = 0; i < 256; ++i) {
+    for (int i = 1; i <= 255; ++i) {
         char keyChar[2];
         snprintf(keyChar, 2, "%c", i);
         String* key = rawDecode(keyChar);

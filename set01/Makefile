@@ -1,10 +1,9 @@
-CC=gcc
+CC=egcc
 CFLAGS=-std=c11 -g
 LIBS=-lm
 
 SRC=$(wildcard *.c)
-HDR=$(wildcard *.h)
-a.out: $(SRC) $(HDR)
+a.out: $(SRC)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 clean:

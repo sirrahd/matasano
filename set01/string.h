@@ -1,5 +1,4 @@
-#ifndef _STRING_H_
-#define _STRING_H_
+#pragma once
 
 typedef struct {
     unsigned char* data;
@@ -17,5 +16,3 @@ const char* b64Encode(String* s);
 void deleteString(String* s);
 
 String* xorString(String* s1, const String* key);
-
-#endif
